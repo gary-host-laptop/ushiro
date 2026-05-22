@@ -1,7 +1,5 @@
 "use strict";
 
-// Import browser polyfill for Manifest V3 service worker
-importScripts('browser-polyfill.js');
 
 browser.runtime.onInstalled.addListener(function (d) {
 	if (d.reason === "install") {
@@ -40,15 +38,9 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 	if (info.menuItemId === "behind_ctxmenu") {
 		updCtx({"visible": false});
 		let fn = function(opt) {
-			// we only handle the 'off' and 'one' cases here.
-			// 'big', 'wide' and 'tall' must be handled within the inline
-			// page; as we don't currently have the image sizes at hand.
-			let u;
-			if (bypassMode !== 'off' && oneResult && oneResult.t !== "VIDEO") {
-				u = "/img.html#!" + oneResult.e;
-			} else {
-				u = "/inline.html";
-			}
+			// img.html is removed; always open inline.html.
+			// bypass 'one'/'big'/'wide'/'tall' auto-open is handled inside inline.js.
+			let u = browser.runtime.getURL("inline.html");
 			browser.tabs.create({ url: u, active: opt && opt.bgCbox !== "f", openerTabId: tab.id});
 		};
 		browser.storage.local.get('bgCbox').then(fn, () => fn({bgCbox: "t"}));
@@ -81,5 +73,13 @@ browser.runtime.onMessage.addListener (function (fn, x) {
 		// no refresh function in chrome
 		if (typeof browser.contextMenus.refresh === "function")
 			browser.contextMenus.refresh ();
+	}
+
+	// Fetch image size from bg script — has <all_urls> permission, bypasses CORS
+	if (fn && fn.nm == "fetchImageSize") {
+		return fetch(fn.url)
+			.then(function(r) { return r.blob(); })
+			.then(function(b) { return { size: b.size }; })
+			.catch(function() { return { size: null }; });
 	}
 });

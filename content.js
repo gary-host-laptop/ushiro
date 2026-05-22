@@ -100,4 +100,13 @@ document.addEventListener ("contextmenu", onCtxMenu, true);
 browser.runtime.onMessage.addListener (function (fn, x) {
 	if (fn && fn.nm == "fetchClickedElements")
 		return Promise.resolve ({ el: last });
+
+	// Fetch image as blob from page origin context to get accurate file size.
+	// This bypasses CORS issues that affect fetches from the extension page.
+	if (fn && fn.nm == "fetchImageSize") {
+		return fetch(fn.url)
+			.then(function (r) { return r.blob(); })
+			.then(function (b) { return { size: b.size }; })
+			.catch(function () { return { size: null }; });
+	}
 });

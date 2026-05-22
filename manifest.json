@@ -1,0 +1,64 @@
+{
+  "manifest_version": 2,
+  "name": "Ushiro",
+  "version": "1.0.0",
+  "description": "Download images from pages that try to block it.",
+  "default_locale": "en",
+
+  "icons": {
+    "48":  "icon.svg",
+    "96":  "icon.svg",
+    "128": "icon.svg"
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "downloads",
+    "<all_urls>"
+  ],
+
+  "optional_permissions": [
+    "history"
+  ],
+
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "bg.js"
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "browser-polyfill.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "48": "icon.svg"
+    },
+    "default_title": "Ushiro"
+  },
+
+  "web_accessible_resources": [
+    "inline.html",
+    "icon.svg",
+    "icon_dark.svg"
+  ],
+
+  "content_security_policy": "script-src 'self'; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com https://unpkg.com;",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "109.0"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="browser-polyfill.js"></script>
+        <script type="text/javascript" src="inline.js"></script>
+        <script type="text/javascript" src="matrix.js"></script>
+        <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml" />
+        <link rel="stylesheet" type="text/css" href="inline.css" />
+        <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+    </head>
+    <body>
+        <canvas id="matrix-rain"></canvas>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true">
+            <div class="lb-topbar">
+                <span id="lb-filename" class="lb-filename">—</span>
+                <span id="lb-meta" class="lb-meta">—</span>
+                <div class="lb-actions">
+                    <button id="lb-download" class="lb-btn">[DOWNLOAD]</button>
+                    <button id="lb-copy" class="lb-btn">[COPY LINK]</button>
+                    <button id="lb-close" class="lb-btn">[ESC]</button>
+                </div>
+            </div>
+            <div id="lb-img-wrap" class="lb-img-wrap">
+                <img id="lb-img" src="" alt="" />
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div id="main">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <span id="result-count" class="result-count">—</span>
+                    <div id="type-filters" class="type-filters"></div>
+                </div>
+                <div class="top-bar-right">
+                    <div class="orderSelector">
+                        <select id="sortOrder"></select>
+                        <button id="sortDir" class="sort-dir-btn" title="Toggle direction">↑</button>
+                    </div>
+                    <button id="download-all" class="btn-topbar" title="Download all"><i class="ph-light ph-tray-arrow-down"></i></button>
+                </div>
+            </div>
+
+            <div id="gallery"></div>
+        </div>
+    </body>
+</html>
