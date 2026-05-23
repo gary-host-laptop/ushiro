@@ -1,150 +1,20 @@
 {
-  "extensionName": {
-    "message": "behind!",
-    "description": "Name of the extension."
-  },
-  "extensionDescription": {
-    "message": "Finds and opens all images under your cursor.",
-    "description": "Description of the extension."
-  },
-  "resultsPageTitle": {
-    "message": "behind!",
-    "description": "Title of the results page at inline.html."
-  },
-  "optionsPageTitle": {
-    "message": "behind! Options",
-    "description": "Title of the options page at options.html."
-  },
   "menuButtonTextDefault": {
-    "message": "behind!",
-    "description": "Default context menu button text."
+    "message": "Ushiro"
   },
   "menuButtonTextWithNum": {
-    "message": "behind! ($N$)",
-    "description": "Context menu button text when there are N images found.",
-    "placeholders": {"N" : { "content" : "$1"}}
+    "message": "Ushiro — $1 image(s)",
+    "placeholders": {
+      "1": { "content": "$1" }
+    }
   },
   "menuButtonTextFrameDisabled": {
-    "message": "behind! 'iframe' etiketleri içinde çalışmaz.",
-    "description": "Context menu button text when there are iframes."
+    "message": "Ushiro (unavailable in frames)"
   },
-  "imgSizeText": {
-    "message": "Original image size: $W$px to $H$px",
-    "description": "Text indicating the original image size in pixels.",
-    "placeholders": {"W" : { "content" : "$1"}, "H" : { "content" : "$2"}}
+  "resultsPageTitle": {
+    "message": "Ushiro"
   },
   "errorNoImages": {
-    "message": "No images were found.",
-    "description": "Error message for when no images could be extracted."
-  },
-  "errorTabsSendMessage": {
-    "message": "Error while sending message to tab: $ERR_MSG$",
-    "description": "Error message for errors in tabs.sendMessage().",
-    "placeholders": {"ERR_MSG" : { "content" : "$1"}}
-  },
-  "errorTabsGetCurrent": {
-    "message": "Error while retrieving current tab info: $ERR_MSG$",
-    "description": "Error message for errors in tabs.getCurrent().",
-    "placeholders": {"ERR_MSG" : { "content" : "$1"}}
-  },
-  "bgCheckbox": {
-    "message": "Bring inline images screen forward",
-    "description": "Bring inline images screen forward option text"
-  },
-  "bgCheckboxHint": {
-    "message": "If checked, tabs opened by behind! will be active (they will be brought forward)",
-    "description": "Bring inline images screen forward option help text"
-  },
-  "lightTheme": {
-    "message": "Light",
-    "description": "Light theme text"
-  },
-  "darkTheme": {
-    "message": "Dark",
-    "description": "Dark theme text"
-  },
-  "autoTheme": {
-    "message": "Automatic",
-    "description": "Auto theme text"
-  },
-  "themeHint": {
-    "message": "Theme selection. 'Automatic' option attempts to match the system theme.",
-    "description": "Theme selection option help text"
-  },
-  "historyPermRequest": {
-    "message": "Request history permission",
-    "description": "Requests the history permission to be added to the add-on"
-  },
-  "historyPermRevoke": {
-    "message": "Revoke history permission",
-    "description": "Revokes the history permission granted to the add-on"
-  },
-  "historyPermHint": {
-    "message": "behind! requires the history permission to remove the pages it generates from your history. Without this permission, the browser history will be polluted with auto-generated links. If you prefer this behavior to exposing your history to the add-on, you can revoke the history permission.",
-    "description": "History permission explanation"
-  },
-  "offBypass": {
-    "message": "No bypass (Results page will always be opened)",
-    "description": ""
-  },
-  "oneBypass": {
-    "message": "Directly open one-image results",
-    "description": ""
-  },
-  "bigBypass": {
-    "message": "Directly open the largest image",
-    "description": ""
-  },
-  "wideBypass": {
-    "message": "Directly open the widest image",
-    "description": ""
-  },
-  "tallBypass": {
-    "message": "Directly open the tallest image",
-    "description": ""
-  },
-  "bypassHint": {
-    "message": "If one of the bypass settings is enabled; the resulting image list is bypassed and image matching the criteria will be opened directly.",
-    "description": ""
-  },
-  "resultsPageWidestAltText": {
-    "message": "Widest Image",
-    "description": "Widest image hint text"
-  },
-  "resultsPageTallestAltText": {
-    "message": "Tallest Image",
-    "description": "Tallest image hint text"
-  },
-  "resultsPageLargestAltText": {
-    "message": "Largest Image",
-    "description": "Largest image hint text"
-  },
-  "order_none": {
-    "message": "No ordering",
-    "description": "No ordering option text"
-  },
-  "order_widest_first": {
-    "message": "Widest first",
-    "description": "Widest first ordering option text"
-  },
-  "order_widest_last": {
-    "message": "Widest last",
-    "description": "Widest last ordering option text"
-  },
-  "order_tallest_first": {
-    "message": "Tallest first",
-    "description": "Tallest first ordering option text"
-  },
-  "order_tallest_last": {
-    "message": "Tallest last",
-    "description": "Tallest last ordering option text"
-  },
-  "order_largest_first": {
-    "message": "Largest first",
-    "description": "Largest first ordering option text"
-  },
-  "order_largest_last": {
-    "message": "Largest last",
-    "description": "Largest last ordering option text"
+    "message": "No images found"
   }
 }

@@ -1,24 +1,25 @@
-# behind!
+<div align="center">
+  <img src="./assets/icon.svg" width="128px" />
+  <h1>後ろ · ushiro</h1>
+</div>
 
-![behind!](/icon256.png?raw=true )
+Every image a website doesn't want you to have is still there — just buried. Ushiro drops you behind the scenes to find it. Background images, clickable decoys, alternative resolutions, inline SVGs, base64 chunks, shadow DOM. If it rendered on your screen, you can take it.
 
-![Mozilla Add-on](https://img.shields.io/amo/v/behind?style=flat-square) ![Mozilla Add-on](https://img.shields.io/amo/users/behind?style=flat-square) ![Mozilla Add-on](https://img.shields.io/amo/stars/behind?style=flat-square)
+<img src="./assets/screenshot.png" />
 
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blfpdedbdighagggfhgihcocfheicfjk?style=flat-square) ![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blfpdedbdighagggfhgihcocfheicfjk?style=flat-square) ![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blfpdedbdighagggfhgihcocfheicfjk?style=flat-square)
+## Installation
 
-![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)
+### From Mozilla Add-ons (recommended)
+<a href="https://addons.mozilla.org/en-GB/firefox/addon/%E7%84%A1%E3%82%BF%E3%83%96-mutabu/">
+  <img width="25%" height="25%" alt="get the add-on button" src="./assets/images/add-on.png" />
+</a>
 
-When "view background image" is greyed out, this add-on is there to help you.
+1. Click "Get the Add-On"
+2. Confirm permissions
 
-behind! can reveal:
-
-- Background images,
-- Images under layers of nonsense (e.g. clickable surfaces designed to hide the image from you),
-- Embedded images / base64-encoded image chunks,
-- Alternative resolutions ,
-- Vector images (even when they are inlined),
-- Images in shadow DOM
-
-[Link to the Firefox addon page](https://addons.mozilla.org/en-US/firefox/addon/behind/)
-
-[Link to the Chrome extension page](https://chrome.google.com/webstore/detail/behind/blfpdedbdighagggfhgihcocfheicfjk?hl=en&authuser=0)
+### Manual install (signed)
+1. Download `ushiro-x.x.x.xpi` from the [latest release](https://github.com/gary-host-laptop/mutabu/releases/latest)
+2. Open Firefox and go to `about:addons`
+3. Click the gear icon ⚙ → **Install Add-on From File**
+4. Select the downloaded `.xpi` file
+5. Click **Add** when prompted

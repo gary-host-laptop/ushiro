@@ -5,7 +5,7 @@
         <script type="text/javascript" src="browser-polyfill.js"></script>
         <script type="text/javascript" src="inline.js"></script>
         <script type="text/javascript" src="matrix.js"></script>
-        <link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml" />
+        <link rel="icon" href="assets/icon.svg" sizes="any" type="image/svg+xml" />
         <link rel="stylesheet" type="text/css" href="inline.css" />
         <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
     </head>
@@ -18,9 +18,9 @@
                 <span id="lb-filename" class="lb-filename">—</span>
                 <span id="lb-meta" class="lb-meta">—</span>
                 <div class="lb-actions">
-                    <button id="lb-download" class="lb-btn">[DOWNLOAD]</button>
-                    <button id="lb-copy" class="lb-btn">[COPY LINK]</button>
-                    <button id="lb-close" class="lb-btn">[ESC]</button>
+                    <button id="lb-download" class="lb-btn" title="Download"><i class="ph-light ph-download-simple"></i></button>
+                    <button id="lb-copy" class="lb-btn" title="Copy link"><i class="ph-light ph-link"></i></button>
+                    <button id="lb-close" class="lb-btn" title="Close (Esc)"><i class="ph-light ph-x"></i></button>
                 </div>
             </div>
             <div id="lb-img-wrap" class="lb-img-wrap">
@@ -37,8 +37,14 @@
                 </div>
                 <div class="top-bar-right">
                     <div class="orderSelector">
-                        <select id="sortOrder"></select>
-                        <button id="sortDir" class="sort-dir-btn" title="Toggle direction">↑</button>
+                        <div class="custom-select" id="sortOrder">
+                            <button class="custom-select-btn">
+                                <span id="sortLabel">Resolution</span>
+                                <i class="ph-light ph-caret-down"></i>
+                            </button>
+                            <div class="custom-select-dropdown" id="sortDropdown"></div>
+                        </div>
+                        <button id="sortDir" class="sort-dir-btn" title="Toggle direction">↓</button>
                     </div>
                     <button id="download-all" class="btn-topbar" title="Download all"><i class="ph-light ph-tray-arrow-down"></i></button>
                 </div>

@@ -27,34 +27,84 @@ function computeCardWidth(cols) {
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
 
+function isDataUrl(url) {
+    return url.startsWith("data:");
+}
+
+function getDataMime(url) {
+    // data:[mime];base64,... or data:[mime],... (no charset)
+    var withoutPrefix = url.slice(5); // remove "data:"
+    var mime = withoutPrefix.split(";")[0].split(",")[0];
+    return mime;
+}
+
 function getFileType(url) {
+    if (isDataUrl(url)) {
+        var mime = getDataMime(url);
+        var map  = { "image/jpeg": "JPG", "image/png": "PNG", "image/webp": "WEBP",
+                     "image/gif": "GIF", "image/svg+xml": "SVG", "image/avif": "AVIF" };
+        return map[mime] || "IMG";
+    }
     try {
         var path = new URL(url).pathname.toLowerCase().split("?")[0].split("#")[0];
         var ext  = path.split(".").pop();
         var map  = {
-            jpg: "JPG", jpeg: "JPG",
-            png: "PNG",
-            webp: "WEBP",
-            gif: "GIF",
-            svg: "SVG",
-            avif: "AVIF",
-            bmp: "BMP",
-            ico: "ICO"
+            jpg: "JPG", jpeg: "JPG", png: "PNG", webp: "WEBP",
+            gif: "GIF", svg: "SVG", avif: "AVIF", bmp: "BMP", ico: "ICO"
         };
         return map[ext] || "IMG";
-    } catch (e) {
-        return "IMG";
-    }
+    } catch (e) { return "IMG"; }
 }
 
 function getFileName(url) {
+    if (isDataUrl(url)) {
+        var mime = getDataMime(url);
+        var ext  = mime.split("/")[1] || "img";
+        if (ext === "svg+xml") ext = "svg";
+        return "image." + ext;
+    }
     try {
         return decodeURIComponent(
             new URL(url).pathname.split("/").pop().split("?")[0]
         ) || "image";
-    } catch (e) {
-        return "image";
+    } catch (e) { return "image"; }
+}
+
+function downloadImage(url, filename) {
+    var name = filename || getFileName(url);
+
+    if (isDataUrl(url)) {
+        try {
+            var mime     = getDataMime(url);
+            var commaIdx = url.indexOf(",");
+            var content  = url.slice(commaIdx + 1);
+            var isBase64 = url.slice(5, commaIdx).indexOf("base64") !== -1;
+            var blob;
+            if (isBase64) {
+                var binary = atob(content);
+                var bytes  = new Uint8Array(binary.length);
+                for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+                blob = new Blob([bytes], { type: mime });
+            } else {
+                blob = new Blob([decodeURIComponent(content)], { type: mime });
+            }
+            var burl = URL.createObjectURL(blob);
+            browser.downloads.download({ url: burl, filename: name, saveAs: false })
+                .then(function () { setTimeout(function () { URL.revokeObjectURL(burl); }, 10000); })
+                .catch(function () { window.open(url, "_blank"); });
+        } catch(e) {
+            window.open(url, "_blank");
+        }
+        return;
     }
+
+    browser.downloads.download({
+        url:      url,
+        filename: name,
+        saveAs:   false
+    }).catch(function () {
+        window.open(url, "_blank");
+    });
 }
 
 function formatSize(bytes) {
@@ -71,19 +121,6 @@ function fetchFileSizeViaContentScript(url) {
     return browser.runtime.sendMessage({ nm: "fetchImageSize", url: url })
         .then(function (r) { return r && r.size ? formatSize(r.size) : null; })
         .catch(function () { return null; });
-}
-
-// ── Download ──────────────────────────────────────────────────────────────────
-
-function downloadImage(url, filename) {
-    browser.downloads.download({
-        url:      url,
-        filename: filename || getFileName(url),
-        saveAs:   false
-    }).catch(function () {
-        // fallback if downloads API fails for some reason
-        window.open(url, "_blank");
-    });
 }
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
@@ -147,22 +184,44 @@ function sortGallery() {
 }
 
 function setupOrderSelector() {
-    var s   = document.getElementById("sortOrder");
-    var btn = document.getElementById("sortDir");
-    if (!s) return;
+    var dropdown = document.getElementById("sortDropdown");
+    var label    = document.getElementById("sortLabel");
+    var btn      = document.getElementById("sortDir");
+    var trigger  = document.querySelector(".custom-select-btn");
+    if (!dropdown) return;
 
-    s.innerHTML = "";
-    [["resolution", "Resolution"], ["width", "Width"], ["height", "Height"]].forEach(function (pair) {
-        var o = document.createElement("option");
-        o.value       = pair[0];
-        o.textContent = pair[1];
-        if (pair[0] === currentSort) o.selected = true;
-        s.appendChild(o);
+    var options = [["resolution", "Resolution"], ["width", "Width"], ["height", "Height"]];
+
+    options.forEach(function (pair) {
+        var opt = document.createElement("button");
+        opt.className        = "custom-select-option";
+        opt.dataset.value    = pair[0];
+        opt.textContent      = pair[1];
+        if (pair[0] === currentSort) {
+            opt.classList.add("selected");
+            if (label) label.textContent = pair[1];
+        }
+        opt.addEventListener("click", function () {
+            currentSort = pair[0];
+            if (label) label.textContent = pair[1];
+            dropdown.querySelectorAll(".custom-select-option").forEach(function (o) {
+                o.classList.toggle("selected", o.dataset.value === currentSort);
+            });
+            dropdown.classList.remove("open");
+            sortGallery();
+        });
+        dropdown.appendChild(opt);
     });
 
-    s.addEventListener("change", function () {
-        currentSort = s.value;
-        sortGallery();
+    if (trigger) {
+        trigger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("open");
+        });
+    }
+
+    document.addEventListener("click", function () {
+        dropdown.classList.remove("open");
     });
 
     if (btn) {
@@ -335,9 +394,8 @@ function makeLiElem(gallery, el, idx) {
 
     var overlay = document.createElement("div");
     overlay.className = "img-overlay";
-    var overlayLabel = document.createElement("span");
-    overlayLabel.className   = "img-overlay-label";
-    overlayLabel.textContent = "[VIEW]";
+    var overlayLabel = document.createElement("i");
+    overlayLabel.className   = "ph-light ph-eye img-overlay-label";
     overlay.appendChild(overlayLabel);
 
     wrap.appendChild(im);

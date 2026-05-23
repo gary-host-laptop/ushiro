@@ -2,9 +2,7 @@
 
 
 browser.runtime.onInstalled.addListener(function (d) {
-	if (d.reason === "install") {
-		browser.runtime.openOptionsPage();
-	}
+	// options page removed — history permission managed via Firefox extension settings
 });
 
 var oneResult = undefined;

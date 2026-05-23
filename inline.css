@@ -69,7 +69,7 @@ body {
 
 .result-count {
     font-size: 11px;
-    color: var(--accent-dim);
+    color: var(--accent);
     white-space: nowrap;
     height: 30px;
     display: flex;
@@ -110,22 +110,69 @@ body {
     gap: 2px;
 }
 
-.orderSelector select {
+.custom-select {
+    position: relative;
+    width: 120px;
+}
+
+.custom-select-btn {
     background: var(--surface);
     border: none;
-    color: var(--accent);
+    color: var(--accent-bright);
     font-family: var(--font);
     font-size: 11px;
     padding: 0 10px;
     height: 30px;
+    width: 100%;
     outline: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: background 0.1s;
+}
+
+.custom-select-btn:hover { background: #1a2220; }
+.custom-select-btn i { font-size: 12px; color: var(--accent-dim); margin-left: auto; }
+
+.custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    width: 100%;
+    background: var(--surface);
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+}
+
+.custom-select-dropdown.open { display: flex; }
+
+.custom-select-option {
+    background: transparent;
+    border: none;
+    color: var(--accent-dim);
+    font-family: var(--font);
+    font-size: 11px;
+    padding: 7px 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    outline: none;
+    white-space: nowrap;
+}
+
+.custom-select-option:hover,
+.custom-select-option.selected {
+    background: #1a2220;
+    color: var(--accent);
 }
 
 .sort-dir-btn {
     background: var(--surface);
     border: none;
-    color: var(--accent-dim);
+    color: var(--accent-bright);
     font-family: var(--font);
     font-size: 13px;
     width: 30px;
@@ -260,11 +307,9 @@ body {
 }
 
 .img-overlay-label {
-    font-size: 11px;
-    font-family: var(--font);
+    font-size: 28px;
     color: var(--accent-bright);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    line-height: 1;
 }
 
 /* info row — single line with icon actions on the right */
@@ -319,9 +364,11 @@ body {
 .icon-btn {
     background: transparent;
     border: none;
-    color: var(--accent-dim);
+    color: var(--accent-bright);
     cursor: pointer;
-    padding: 2px 4px;
+    padding: 0;
+    width: 28px;
+    height: 28px;
     outline: none;
     display: flex;
     align-items: center;
@@ -329,10 +376,11 @@ body {
     transition: color 0.1s;
     font-size: 16px;
     line-height: 1;
+    flex-shrink: 0;
 }
 
-.icon-btn:hover { color: var(--accent-bright); }
-.icon-btn.flash { color: var(--accent-bright); }
+.icon-btn:hover { color: var(--accent); }
+.icon-btn.flash { color: var(--accent); }
 
 /* error state */
 .load-error {
@@ -391,24 +439,26 @@ body {
 }
 
 .lb-btn {
-    background: transparent;
-    border: 1px solid var(--border-mid);
+    background: var(--surface);
+    border: none;
     color: var(--accent-dim);
-    font-family: var(--font);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 3px 10px;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: background 0.1s, color 0.1s;
     outline: none;
-    white-space: nowrap;
 }
 
 .lb-btn:hover {
-    background: var(--accent);
-    color: var(--bg);
+    background: #1a2220;
+    color: var(--accent-bright);
 }
+
+.lb-btn.flash { color: var(--accent-bright); }
 
 .lb-img-wrap {
     flex: 1;

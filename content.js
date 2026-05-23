@@ -81,7 +81,8 @@ var onCtxMenu = function (e) {
 				// skip blob URLs
 				if (!t.startsWith ("blob:")) {
 					// convert to absolute unless explicitly prevented
-					if (!i) t = new URL (t, document.baseURI).href;
+					// skip data: URLs — new URL() re-encodes them
+					if (!i && !t.startsWith ("data:")) t = new URL (t, document.baseURI).href;
 					if (!r.has(t)) {
 						r.add(t);
 						last.push ({e: t, t: tag});
