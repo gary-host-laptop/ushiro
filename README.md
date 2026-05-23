@@ -10,8 +10,8 @@ Every image a website doesn't want you to have is still there — just buried. U
 ## Installation
 
 ### From Mozilla Add-ons (recommended)
-<a href="https://addons.mozilla.org/en-GB/firefox/addon/%E7%84%A1%E3%82%BF%E3%83%96-mutabu/">
-  <img width="25%" height="25%" alt="get the add-on button" src="./assets/images/add-on.png" />
+<a href="">
+  <img width="25%" height="25%" alt="get the add-on button" src="./assets/add-on.png" />
 </a>
 
 1. Click "Get the Add-On"
