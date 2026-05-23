@@ -3,7 +3,7 @@
   <h1>後ろ · ushiro</h1>
 </div>
 
-Every image a website doesn't want you to have is still there — just buried. Ushiro drops you behind the scenes to find it. Background images, clickable decoys, alternative resolutions, inline SVGs, base64 chunks, shadow DOM. If it rendered on your screen, you can take it.
+Every image a website doesn't want you to have is still there — just gated. Ushiro drops you *[behind](https://github.com/kubuzetto/behind)* the scenes to find it. Background images, clickable decoys, alternative resolutions, inline SVGs, base64 chunks, shadow DOM. If it rendered on your screen, you can take it.
 
 <img src="./assets/screenshot.png" />
 
