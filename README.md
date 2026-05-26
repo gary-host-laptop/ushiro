@@ -18,7 +18,7 @@ Every image a website doesn't want you to have is still there — just gated. Us
 2. Confirm permissions
 
 ### Manual install (signed)
-1. Download `ushiro-x.x.x.xpi` from the [latest release](https://github.com/gary-host-laptop/mutabu/releases/latest)
+1. Download `ushiro-x.x.x.xpi` from the [latest release](https://github.com/gary-host-laptop/ushiro/releases/latest)
 2. Open Firefox and go to `about:addons`
 3. Click the gear icon ⚙ → **Install Add-on From File**
 4. Select the downloaded `.xpi` file
