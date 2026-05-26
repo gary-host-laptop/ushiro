@@ -10,7 +10,7 @@ Every image a website doesn't want you to have is still there — just gated. Us
 ## Installation
 
 ### From Mozilla Add-ons (recommended)
-<a href="">
+<a href="https://addons.mozilla.org/en-US/firefox/addon/%E5%BE%8C%E3%82%8D-ushiro/">
   <img width="25%" height="25%" alt="get the add-on button" src="./assets/add-on.png" />
 </a>
 

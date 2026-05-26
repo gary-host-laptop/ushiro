@@ -67,6 +67,19 @@ body {
     flex-wrap: wrap;
 }
 
+.result-count-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.topbar-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+}
+
 .result-count {
     font-size: 11px;
     color: var(--accent);
